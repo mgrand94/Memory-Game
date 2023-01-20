@@ -10,7 +10,7 @@ const cardArray = [
     ,
     {
         name: 'jeep',
-        img: "images/ford.jpg",
+        img: "images/jeep.jpg",
     }
     ,
     {
@@ -56,6 +56,71 @@ const cardArray = [
 ]
 
 //shuffling array randomly
-//cardArray.sort(() => 0.5 - Math.random())
+cardArray.sort(() => 0.5 - Math.random())
 
-console.log(cardArray);
+const gridDisplay = document.querySelector('#grid')
+const cardsChosen = []
+const cardsChosenIds = []
+
+function createBoard () {
+    for (let i = 0; i < cardArray.length ; i++) {
+        //create card
+        const card = document.createElement('img')
+
+        //assigns image
+        card.setAttribute('src', 'images/graphics.jpg')
+
+        //sets id for each card
+        card.setAttribute('data-id', i)
+
+        //when clicked
+        card.addEventListener('click', flipCard)
+        
+        // adds cards to grid
+        gridDisplay.append(card)
+    }
+}
+
+createBoard();
+
+
+function checkMatch () {
+    const cards = document.querySelectorAll('#grid img')
+    console.log(cards)
+    console.log('check for match!')
+
+    //get both items in chosen card array and see if they match
+    if (cardsChosen[0] == cardsChosen[1]) {
+        alert('You found a match')
+        cards[cardsChosenIds[0]].setAttribute('src', 'images/plain.jpg')
+        cards[cardsChosenIds[1]].setAttribute('src', 'images/plain.jpg')
+        cards[cardId[0]].removeEventListener('click', flipCard)
+    }
+}
+
+function flipCard() {
+    //lets us interact with card we clicked and getting id
+    const cardId = this.getAttribute('data-id')
+    
+    //pushing id into new array
+    cardsChosen.push(cardArray[cardId].name)
+
+    //sets image when flipped
+    this.setAttribute('src', cardArray[cardId].img)
+
+    //once new array has 2 cards, see if they match
+    if(cardsChosen.length === 2) {
+        setTimeout( checkMatch, 500)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

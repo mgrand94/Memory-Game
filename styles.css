@@ -1,0 +1,12 @@
+#grid {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ grid-template-rows: repeat(4, 1fr);
+justify-items: center;
+
+}
+
+#grid img {
+    width: 75%;
+    height: 75%;
+}
