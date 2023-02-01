@@ -85,7 +85,7 @@ createBoard();
 
 
 function checkMatch () {
-    const cards = document.querySelectorAll('#grid img')
+    const cards = document.querySelectorAll('img')
     console.log(cards)
     console.log('check for match!')
 
@@ -94,23 +94,27 @@ function checkMatch () {
         alert('You found a match')
         cards[cardsChosenIds[0]].setAttribute('src', 'images/plain.jpg')
         cards[cardsChosenIds[1]].setAttribute('src', 'images/plain.jpg')
-        cards[cardId[0]].removeEventListener('click', flipCard)
+        cards[cardsChosenIds[0]].removeEventListener('click', flipCard)
+        cards[cardsChosenIds[1]].removeEventListener('click', flipCard)
+
     }
 }
 
 function flipCard() {
     //lets us interact with card we clicked and getting id
     const cardId = this.getAttribute('data-id')
-    
+
     //pushing id into new array
     cardsChosen.push(cardArray[cardId].name)
 
+    cardsChosenIds.push(cardId)
+    
     //sets image when flipped
     this.setAttribute('src', cardArray[cardId].img)
 
     //once new array has 2 cards, see if they match
     if(cardsChosen.length === 2) {
-        setTimeout( checkMatch, 500)
+        setTimeout(checkMatch, 50)
     }
 }
 
